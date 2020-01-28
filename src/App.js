@@ -85,7 +85,7 @@ const App = () => {
         Here is a test of the transition group and styled components, wrapped
         into one. The point is to show how you can transition in elements and
         out elements by wrapping them in the transition group. You can do this
-        using TransitionGroup and CSS Animation.
+        using TransitionGroup and CSSTransition.
       </IntroText>
       <AddButton label={"Add an Item"} addItem={addItem}></AddButton>
       <TileGroup items={items} removeItem={removeItem}></TileGroup>
