@@ -14,16 +14,38 @@ This app builds a very simple application to showcase transitions in and out of 
 * Click the Add Button to see an item transition in
 * Click on the individual item to see it transition out
 
-# Structure of the App
+The main secret sauce is the React-Transition-Group, which allows us to apply classes to enable CSS animations as components are added or removed. In this example a few classes are applied on enter and exit of a Tile.
+
+```
+transition-enter
+transition-enter-active
+transition-exit
+transition-exit-active
+```
+
+`<TransitionGroup>` needs to be a direct parent to any `<CSSTransition>` children, otherwise the behavior begins to get wonky.
+
+## Structure of the App
 ## App.js
+![](public/App.png)
+The App component uses react hooks to store the state and also contains the `addItem()` and `removeItem()` functions, which update the state with an updated item list. These two functions are passed via props down the application to where they need to go, as opposed to using context.
 
-## AddButton.js
+### AddButton.js
+![](public/AddButton.png)
+The add button receives the `addItem()` function and runs this function `onClick`.
 
-## TileGroup.js
+### TileGroup.js
+![](public/TileGroup.png)
+The tile group uses CSS grid to show the grid of tiles. It utilizes `grid-template-columns: repeat(auto-fill, 220px);` to keep the layout responsive by flowing items based on the size of the div. I set the `component` attribute of `<TransitionGroup>` to `<StyledTile>` to ensure I didn't need an additional div in the DOM.
 
-## Tile.js
+This is where the primary implementation of Transition Group is done. A parent `TransitionGroup` component holds the child `CSSTransition` children, which specifies a base class for the CSS transition classes (`classNames="transition"`) creates transition-enter, transition-enter-active, etc.
 
-## helpers.js
+### Tile.js
+![](public/Tile.png)
+Receives the `removeItem()` function via props, becoming the `onClick` handler. Also gets populated with dummy data provided within the `addItem()` function to show title, subtitle, and readtime.
+
+### helpers.js
+I used a modified helper function from one of [Wes Bos' React Courses](https://github.com/wesbos/React-For-Beginners-Starter-Files) to generate random strings to fill the tiles with, just to make the solution look a bit more realistic and appealing.
 
 
 ## Available Scripts
